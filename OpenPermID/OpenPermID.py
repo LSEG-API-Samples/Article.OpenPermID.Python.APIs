@@ -17,14 +17,36 @@ class OpenPermID(object):
     __timeout__ = 30
     __response__ = None
     __quota__ = []
-    MAX_LOG_SIZE = 10000000
-    
+    __max_log_size__ = 10000000
+    __backupCount__ = 10
+    __log_file_name__ = "openpermid"
+    __log_path__ = None
+    __log_format__ = "%(asctime)s -- %(name)s -- %(levelname)s -- %(message)s \n"
 
     def __init__(self):
         self.__access_token__=""
         self.log_path = None
         self.log_level = logging.NOTSET       
         self.logger = logging.getLogger('openpermid')
+
+    def set_log_format(self, format):
+        self.__log_format__ = format
+
+    def set_log_max_size(self, size):
+        self.__max_log_size__ = size
+
+    def set_log_path(self, log_path):       
+        if os.access(log_path, os.W_OK):
+            self.__log_path__ = log_path
+            return True
+        else:
+            return False
+
+    def set_log_file_name(self, name):
+        self.__log_file_name__ = name
+
+    def set_log_backup_count(self, count):
+        self.__backupCount__ = count
 
     def set_lookup_url(self, url):
         self.__lookupurl__ = url
@@ -44,12 +66,7 @@ class OpenPermID(object):
     def set_timeout(self, timeout):
         self.__timeout__ = timeout
 
-    def set_log_path(self, log_path):       
-        if os.access(log_path, os.W_OK):
-            self.log_path = log_path
-            return True
-        else:
-            return False
+
     def get_response(self):
         return self.__response__
 
@@ -58,24 +75,20 @@ class OpenPermID(object):
             return pd.DataFrame([{'Time':'None', 'Quota Daily':'None', 'Quota Used':'None'}])
 
         return pd.DataFrame(self.__quota__)
-    #def get_quota_daily(self):
-    #    return self.__quotaDaily__
-
-    #def get_quota_used(self):
-    #    return self.__quotaUsed__
 
     def set_log_level(self, log_level):
         if log_level > logging.NOTSET:
-            __formatter = logging.Formatter("%(asctime)s -- %(name)s -- %(levelname)s -- %(message)s \n")
-            __filename = 'openpermid.{}.log'.format(datetime.now().strftime('%Y%m%d.%H-%M-%S'))
+            __formatter = logging.Formatter(self.__log_format__)
+            __filename = '{0}_{1}.{2}.log'.format(self.__log_file_name__, os.getpid(), datetime.now().strftime('%Y%m%d.%H-%M-%S'))
+            
+            if self.__log_path__ is not None:
+                if not os.path.isdir(self.__log_path__):
+                    os.makedirs(self.__log_path__)
+                __filename = os.path.join(self.__log_path__, __filename)
 
-            if self.log_path is not None:
-                if not os.path.isdir(self.log_path):
-                    os.makedirs(self.log_path)
-                __filename = os.path.join(self.log_path, __filename)
-
-            __handler = logging.handlers.RotatingFileHandler(__filename, mode='a', maxBytes=self.MAX_LOG_SIZE,
-                                                        backupCount=10, encoding='utf-8')
+            __handler = logging.handlers.RotatingFileHandler(__filename, mode='a', maxBytes=self.__max_log_size__,
+                                                        backupCount=self.__backupCount__, encoding='utf-8')
+            
             __handler.setFormatter(__formatter)
             self.logger.addHandler(__handler)
 
@@ -213,9 +226,9 @@ class OpenPermID(object):
             self.logger.error('%s doesn\'t exist.', filename)
             return None,"File doesn't exist."
         _headers={}
-        if(dataType not in ['Organization','Person','Instruments','Quotes']):
+        if(dataType not in ['Organization','Person','Instrument','Quotation']):
             self.logger.error('Invalid dataType for match: %s', dataType)
-            return None,"The valid dataTypes are 'Organization','Person','Instruments',and 'Quotes'."
+            return None,"The valid dataTypes are 'Organization','Person','Instrument',and 'Quotation'."
 
         if 1 < numberOfMatchesPerRecord > 5:
              self.logger.error('Invalid numberOfMatchesPerRecord for match: %s', numberOfMatchesPerRecord)
@@ -251,9 +264,9 @@ class OpenPermID(object):
         _headers={}
 
 
-        if(dataType not in ['Organization','Person','Instruments','Quotes']):
+        if(dataType not in ['Organization','Person','Instrument','Quotation']):
             self.logger.error('Invalid dataType for match: %s', dataType)
-            return None,"The valid dataTypes are 'Organization','Person','Instruments',and 'Quotes'."
+            return None,"The valid dataTypes are 'Organization','Person','Instrument',and 'Quotation'."
 
         if 1 < numberOfMatchesPerRecord > 5:
              self.logger.error('Invalid numberOfMatchesPerRecord for match: %s', numberOfMatchesPerRecord)
@@ -343,11 +356,10 @@ class OpenPermID(object):
         if(format!='dataframe'):
             return resp, None
      
-        #Format the dataframe and return the dataframe to the caller
-        #1. Remove '@context' from the json-ld 
+        
         jsonObj=json.loads(resp)
        
-        #2. Format the dataframe according to the orient parameter
+       
         if(entityType=='all'):
             dfDict={}
             for (attribute, value) in jsonObj['result'].items():
@@ -421,9 +433,9 @@ class OpenPermID(object):
         _headers={}
 
 
-        if(language not in ['English','Chinese','French','German','Japanese','Spanish']):
-            self.logger.error('Invalid language for calais: %s', language)
-            return None,"The valid languages are 'English','Chinese','French','German','Japanese', and 'Spanish'."
+        #if(language not in ['English','Chinese','French','German','Japanese','Spanish']):
+        #    self.logger.error('Invalid language for calais: %s', language)
+        #    return None,"The valid languages are 'English','Chinese','French','German','Japanese', and 'Spanish'."
 
         if(contentType not in ['raw','html','xml','pdf']):
         #if(contentType not in ['raw','html','xml']):
