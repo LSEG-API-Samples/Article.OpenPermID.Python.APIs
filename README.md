@@ -131,7 +131,7 @@ serach(q, entityType='all', format="dataframe", start=1, num=5, order='rel')
 ```
 |Parameter Name|Required|Description|
 |--------------|--------|-----------|
-|q|Yes|A query string to search for. It could be either just the search string value, or prefix it with "<fieldname>:" to constrain the search to a specific field, such as "**refinitiv**", "**ticker:IBM**", and "**ticker: msft AND exchange:NSM**". For a list of all avaialble fields, please refer to the [PermID User guide](https://developers.refinitiv.com/open-permid/permid-entity-search/docs?content=4885&type=documentation_item).|
+|q|Yes|A query string to search for. It could be either just the search string value, or prefix it with "<fieldname>:" to constrain the search to a specific field, such as "**refinitiv**", "**ticker:IBM**", and "**ticker: msft AND exchange:NSM**". For a list of all available fields, please refer to the [PermID User guide](https://developers.refinitiv.com/open-permid/permid-entity-search/docs?content=4885&type=documentation_item).|
 |entityType|No|The type of entity to search for. Possible values are **all**, **organization**, **instrument**, or **quote**. The default value is **all**|
 |format|No|The format of the output. Possible values are **dataframe**, **json**, or **xml**. The default value is **dataframe**|
 |start|No|The index of the first result returned, in the list of results ordered according to the order parameter. The index is 1-based. The default value is 1.|
@@ -162,7 +162,7 @@ The returned result is a data frame containing 10 entries of the **organization*
 
 ![Search for the entity type of "Refinitiv"](search2.png)
 
-- **Call the search method to search for a "IBM" string with 'quote' and 'json' for the entityType and format parameters respectively** 
+- **Call the search method to search for an "IBM" string with 'quote' and 'json' for the entityType and format parameters respectively** 
 ```
 output,err = opid.search('IBM',entityType='quote',format='json')
 ```
