@@ -83,7 +83,7 @@ It uses the default values of the **format** and **orient** parameters, so the r
 - **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the 'column' orient parameter**
 
 ```Python
-df,err = opid.lookup("1-5064690523", orient="column")
+output,err = opid.lookup("1-5064690523", orient="column")
 ```
 The returned result is a data frame with the column orient.
 
@@ -261,7 +261,7 @@ LocalID,Standard Identifier,Name,Country,Street,City,PostalCode,State,Website
 8,Ticker:FB&&Exchange:NSM,,,,,,,
 9,Ticker:AAPL&&MIC:XNGS,,,,,,,
 """
-output,err = opid.match(inputStr)
+output,err = opid.match(organization)
 ```
 The returned result is a data frame.
 
@@ -505,7 +505,7 @@ calais(text, language='English', contentType='raw', outputFormat='json')
 This function returns a tuple containing a result and error string. The result could be a JSON, RDF or N-Triples string depending on the **outputFormat** parameter.
 
 
-- **Call calais to tag the raw text**
+- **Call the calais method to tag the raw text**
 ```Python
 raw_text ="""
 TOKYO (Reuters) - Financial markets reeled on Thursday as stocks dived and oil slumped after U.S. President Donald Trump took the dramatic step of banning travel from Europe to stem the spread of coronavirus, threatening more disruptions to trade and the world economy.
@@ -620,7 +620,7 @@ The returned result is a JSON string.
     },
 ...
 ```
-- **Call calais to tag the raw text and return an RDF string**
+- **Call the calais method to tag the raw text and return an RDF string**
 ```
 output,err = opid.calais(raw_text, outputFormat='rdf')
 ```
