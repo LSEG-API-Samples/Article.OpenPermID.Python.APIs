@@ -2,7 +2,7 @@
 # Python: Open PermID APIs
 
 ## Overview
-This article introduces a Python library for Open PermID APIs. This library covers all features of Open PermID APIs including Record Matching, Entity Search, and Intelligent Tagging. 
+This article introduces a Python library for Open PermID APIs. This library covers all features of Open PermID APIs including Record Matching, Entity Search, and Intelligent Tagging. A sample Open PermID Python application is available on [GitHub](https://github.com/Refinitiv-API-Samples/Example.OpenPermID.Python.Jupyter).
 
 
 ## Open PermID
