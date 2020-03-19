@@ -681,7 +681,7 @@ This method returns a data frame contains the quota information recorded by this
 
 ![Quota](Quota.png)
 
-**Note:** This method doesn't return the current quota information. It returns records of daily and used quota that appeared inside the HTTP's headers.
+**Note:** This method doesn't return the current quota information. It returns records of daily and used quota inside the HTTP's headers.
 
 ### 9. Logging
 
@@ -745,3 +745,4 @@ Open PermID provides REST APIs to look up, search, match, and tag PermID entitie
 2. Open PermID, Refinitiv Developer Community, accessed 13 Mar 2020, <https://developers.refinitiv.com/open-permid>
 3. Open PermID APIs, Python Package Index, <https://pypi.org/project/OpenPermID/>
 4. Python Open PermID source code, GitHub, <https://github.com/Refinitiv-API-Samples/Article.OpenPermID.Python.APIs>
+5. Python Open PermID example code, GitHub, <https://github.com/Refinitiv-API-Samples/Example.OpenPermID.Python.Jupyter>
