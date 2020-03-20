@@ -680,7 +680,7 @@ This library records this quota information and users can retrieve it by calling
 get_usage()
 ```
 
-__**Sample Usages**__
+__**Sample Usage**__
 
 This method returns a data frame contains the quota information recorded by this library.
 
