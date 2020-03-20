@@ -51,79 +51,7 @@ The access token can be retrieved after login to the [Open PermID](https://permi
 
 ![API Token](pic1.png)
 
-### 3. Entity Lookup
-
-This function is used to look up the entity information by the PermID. 
-
-```
-lookup(id, format='dataframe', orient='row')
-```
-
-It accepts three parameters:
-
-|Parameter Name|Required|Description|
-|--------------|--------|-----------|
-|id|Yes|The PermID used to lookup e.g. 1-5064690523|
-|format|No|The format of the output. Possible values are **dataframe**, **json-ld**, or **turtle**. The default value is **dataframe**|
-|orient|No|The format of the returned data frame. Possible values are **row**, or **column**. The default value is **row**|
-
-This function returns a tuple containing a result and error string. The result could be a data frame, JSON, or turtle string depending on the **format** parameter.
-
-__**Sample Usages**__
-
-- **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the default parameters**
-
-```Python
-df,err = opid.lookup("1-5064690523")
-```
-It uses the default values of the **format** and **orient** parameters, so the returned result is a data frame with the row orient.
-
-![lookup with the default parameters](lookup1.png)
-
-- **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the 'column' orient parameter**
-
-```Python
-output,err = opid.lookup("1-5064690523", orient="column")
-```
-The returned result is a data frame with the column orient.
-
-![lookup with the column orient parameters](lookup2.png)
-
-- **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the 'json-ld' format parameter**
-
-```Python
-output,err = opid.lookup("1-5064690523", format="json-ld")
-```
-The returned result is a JSON string.
-```
-{
-  "@id" : "https://permid.org/1-5064690523",
-  "@type" : "tr-org:Organization",
-  "mdaas:HeadquartersAddress" : "3 Times Sq\n\n\nNEW YORK\nNEW YORK\n10036-6564\n",
-  "mdaas:RegisteredAddress" : "200 Bellevue Pkwy Ste 210\n\n\nWILMINGTON\nDELAWARE\n19809-3709\nUnited States\n",
-  "tr-common:hasPermId" : "5064690523",
-  "hasPrimaryInstrument" : "https://permid.org/1-21661915727",
-  "hasActivityStatus" : "tr-org:statusActive",
-  "tr-org:hasHeadquartersPhoneNumber" : "16462234000",
-  "tr-org:hasLEI" : "549300NF240HXJO7N016",
-  "hasLatestOrganizationFoundedDate" : "2018-03-16T00:00:00Z",
-  "hasPrimaryBusinessSector" : "https://permid.org/1-4294952762",
-  "hasPrimaryEconomicSector" : "https://permid.org/1-4294952767",
-  "hasPrimaryIndustryGroup" : "https://permid.org/1-4294952759",
-  "tr-org:hasRegisteredFaxNumber" : "13027985841",
-  "tr-org:hasRegisteredPhoneNumber" : "13027985860",
-  "isIncorporatedIn" : "http://sws.geonames.org/6252001/",
-  "isDomiciledIn" : "http://sws.geonames.org/2635167/",
-  "hasURL" : "https://www.refinitiv.com",
-  "vcard:organization-name" : "Refinitiv US Holdings Inc",
-  "@context" : {
-    "HeadquartersAddress" : {
-      "@id" : "http://ont.thomsonreuters.com/mdaas/HeadquartersAddress",
-      "@type" : "http://www.w3.org/2001/XMLSchema#string"
-...
-```
-
-### 4. Entity Search
+### 3. Entity Search
 
 This function is used to search an entity's PermID value from a string. 
 ```
@@ -228,6 +156,80 @@ The returned result is a JSON string.
   }
 }
 ```
+
+### 4. Entity Lookup
+
+This function is used to look up the entity information by the PermID.
+
+```
+lookup(id, format='dataframe', orient='row')
+```
+
+It accepts three parameters:
+
+|Parameter Name|Required|Description|
+|--------------|--------|-----------|
+|id|Yes|The PermID used to lookup e.g. 1-5064690523|
+|format|No|The format of the output. Possible values are **dataframe**, **json-ld**, or **turtle**. The default value is **dataframe**|
+|orient|No|The format of the returned data frame. Possible values are **row**, or **column**. The default value is **row**|
+
+This function returns a tuple containing a result and error string. The result could be a data frame, JSON, or turtle string depending on the **format** parameter.
+
+__**Sample Usages**__
+
+- **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the default parameters**
+
+```Python
+df,err = opid.lookup("1-5064690523")
+```
+It uses the default values of the **format** and **orient** parameters, so the returned result is a data frame with the row orient.
+
+![lookup with the default parameters](lookup1.png)
+
+- **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the 'column' orient parameter**
+
+```Python
+output,err = opid.lookup("1-5064690523", orient="column")
+```
+The returned result is a data frame with the column orient.
+
+![lookup with the column orient parameters](lookup2.png)
+
+- **Call the lookup method to retrieve the entity information of the 1-5064690523 PermID with the 'json-ld' format parameter**
+
+```Python
+output,err = opid.lookup("1-5064690523", format="json-ld")
+```
+The returned result is a JSON string.
+```
+{
+  "@id" : "https://permid.org/1-5064690523",
+  "@type" : "tr-org:Organization",
+  "mdaas:HeadquartersAddress" : "3 Times Sq\n\n\nNEW YORK\nNEW YORK\n10036-6564\n",
+  "mdaas:RegisteredAddress" : "200 Bellevue Pkwy Ste 210\n\n\nWILMINGTON\nDELAWARE\n19809-3709\nUnited States\n",
+  "tr-common:hasPermId" : "5064690523",
+  "hasPrimaryInstrument" : "https://permid.org/1-21661915727",
+  "hasActivityStatus" : "tr-org:statusActive",
+  "tr-org:hasHeadquartersPhoneNumber" : "16462234000",
+  "tr-org:hasLEI" : "549300NF240HXJO7N016",
+  "hasLatestOrganizationFoundedDate" : "2018-03-16T00:00:00Z",
+  "hasPrimaryBusinessSector" : "https://permid.org/1-4294952762",
+  "hasPrimaryEconomicSector" : "https://permid.org/1-4294952767",
+  "hasPrimaryIndustryGroup" : "https://permid.org/1-4294952759",
+  "tr-org:hasRegisteredFaxNumber" : "13027985841",
+  "tr-org:hasRegisteredPhoneNumber" : "13027985860",
+  "isIncorporatedIn" : "http://sws.geonames.org/6252001/",
+  "isDomiciledIn" : "http://sws.geonames.org/2635167/",
+  "hasURL" : "https://www.refinitiv.com",
+  "vcard:organization-name" : "Refinitiv US Holdings Inc",
+  "@context" : {
+    "HeadquartersAddress" : {
+      "@id" : "http://ont.thomsonreuters.com/mdaas/HeadquartersAddress",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+...
+```
+
+
 ### 5. Record Matching
 
 The PermID Record Matching API allows you to match entity Person, Organization, Instrument,
@@ -677,6 +679,9 @@ This library records this quota information and users can retrieve it by calling
 ```
 get_usage()
 ```
+
+__**Sample Usages**__
+
 This method returns a data frame contains the quota information recorded by this library.
 
 ![Quota](Quota.png)
