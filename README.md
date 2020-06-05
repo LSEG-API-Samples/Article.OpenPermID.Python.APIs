@@ -55,7 +55,7 @@ The access token can be retrieved after login to the [Open PermID](https://permi
 
 This function is used to search an entity's PermID value from a string. 
 ```
-serach(q, entityType='all', format="dataframe", start=1, num=5, order='rel')
+search(q, entityType='all', format="dataframe", start=1, num=5, order='rel')
 ```
 |Parameter Name|Required|Description|
 |--------------|--------|-----------|
