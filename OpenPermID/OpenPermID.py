@@ -198,7 +198,7 @@ class OpenPermID(object):
 
         self.__response__ = response
         self.logger.debug('Response: %s, %s, %s', response, response.headers, response.text)
-        if(response.status_code == requests.codes.ok and response.headers["Content-Type"]=='text/html'):
+        if(response.status_code == requests.codes.ok and "Content-Type" not in response.headers):
             self.logger.error("%s, %s, %s", response, response.headers, response.text[0:200])
             return None, "Not Found"
 
@@ -226,9 +226,9 @@ class OpenPermID(object):
             self.logger.error('%s doesn\'t exist.', filename)
             return None,"File doesn't exist."
         _headers={}
-        if(dataType not in ['Organization','Person','Instrument','Quotation']):
+        if(dataType not in ['Organization','Person','Instrument','Quote']):
             self.logger.error('Invalid dataType for match: %s', dataType)
-            return None,"The valid dataTypes are 'Organization','Person','Instrument',and 'Quotation'."
+            return None,"The valid dataTypes are 'Organization','Person','Instrument',and 'Quote'."
 
         if 1 < numberOfMatchesPerRecord > 5:
              self.logger.error('Invalid numberOfMatchesPerRecord for match: %s', numberOfMatchesPerRecord)
@@ -264,9 +264,9 @@ class OpenPermID(object):
         _headers={}
 
 
-        if(dataType not in ['Organization','Person','Instrument','Quotation']):
+        if(dataType not in ['Organization','Person','Instrument','Quote']):
             self.logger.error('Invalid dataType for match: %s', dataType)
-            return None,"The valid dataTypes are 'Organization','Person','Instrument',and 'Quotation'."
+            return None,"The valid dataTypes are 'Organization','Person','Instrument',and 'Quote'."
 
         if 1 < numberOfMatchesPerRecord > 5:
              self.logger.error('Invalid numberOfMatchesPerRecord for match: %s', numberOfMatchesPerRecord)
