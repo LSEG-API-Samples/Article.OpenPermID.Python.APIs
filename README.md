@@ -241,7 +241,7 @@ match(data,dataType='Organization',numberOfMatchesPerRecord=1,raw_output=False)
 |Parameter Name|Required|Description|
 |--------------|--------|-----------|
 |data|Yes|A CSV string or data frame for matching. For formats of the CSV string, please refer to the [PermID User guide](https://developers.refinitiv.com/open-permid/permid-entity-search/docs?content=4885&type=documentation_item).|
-|dataType|No|The type of entity to search for. Possible values are **Person**, **Organization**, **Instrument**, or **Quotation**. The default value is **Organization**.|
+|dataType|No|The type of entity to search for. Possible values are **Person**, **Organization**, **Instrument**, or **Quote**. The default value is **Organization**.|
 |numberOfMatchesPerRecord|No|A number of possible matches to output for each record in the input. The maximum number of possible matches is 5. The default value is 1.|
 |raw_output|No|A boolean value set to retrieve a result as a JSON string instead of a data frame. The default value is False which returns a data frame.|
 
@@ -294,15 +294,15 @@ The returned result is a data frame.
 
 ![Match person dataframe](match2.png)
 
-- **Call the match method to match the Quotation entity with a CSV string and return a JSON string**
+- **Call the match method to match the Quote entity with a CSV string and return a JSON string**
 ```
-quotation="""
+quote="""
 LocalID,Standard Identifier
 1,RIC:IBM.N|Ticker:IBM
 2,Ticker:MSFT
 3,RIC:IBM.N&&Ticker:IBM
 """
-output,err = opid.match(quotation, dataType='Quotation',raw_output=True)
+output,err = opid.match(quote, dataType='Quote',raw_output=True)
 ```
 The returned result is a JSON string.
 ```
@@ -371,7 +371,7 @@ matchFile(filename,dataType='Organization',numberOfMatchesPerRecord=1,raw_output
 |Parameter Name|Required|Description|
 |--------------|--------|-----------|
 |filename|Yes|A filename of the CSV file containing records to be matched. Templates for the CSV files can be downloaded at the [Record Matching](https://permid.org/match) website.|
-|dataType|No|The type of entity to search for. Possible values are **Person**, **Organization**, **Instrument**, or **Quotation**. The default value is **Organization**.|
+|dataType|No|The type of entity to search for. Possible values are **Person**, **Organization**, **Instrument**, or **Quote**. The default value is **Organization**.|
 |numberOfMatchesPerRecord|No|A number of possible matches to output for each record in the input. The maximum number of possible matches is 5. The default value is 1.|
 |raw_output|No|A boolean value set to retrieve a result as a JSON string instead of a data frame. The default value is False which returns a data frame.|
 
